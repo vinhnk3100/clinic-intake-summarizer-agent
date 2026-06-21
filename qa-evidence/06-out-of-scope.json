@@ -1,0 +1,28 @@
+{
+  "extraction": {
+    "chief_complaint": "Tired symptoms",
+    "symptoms": [
+      "Tiredness"
+    ],
+    "duration": "Not provided",
+    "medications": [],
+    "allergies": [],
+    "medical_history": [],
+    "missing_information": [
+      "Details about the tiredness, including onset, severity, and any associated symptoms."
+    ],
+    "red_flags": [],
+    "suggested_questions": [
+      "Can you tell me more about this tiredness?",
+      "When did you first start feeling tired?",
+      "Are there any other symptoms you've noticed?",
+      "Have you made any recent changes to your sleep, diet, or activity levels?"
+    ],
+    "clinician_summary": "Patient reports experiencing tired symptoms. Further details are needed regarding the duration, severity, and any associated symptoms."
+  },
+  "red_flags": [],
+  "pii_findings": [],
+  "routing_decision": "HUMAN_REVIEW_REQUIRED",
+  "safety_notes": "Out-of-scope request detected: software coding request; routed for clinician review. This output is an intake summary only. It is not medical advice, diagnosis, or treatment. A clinician must review the case before any clinical decision.",
+  "clinician_review": null
+}

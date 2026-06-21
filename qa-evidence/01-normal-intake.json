@@ -1,0 +1,40 @@
+{
+  "extraction": {
+    "chief_complaint": "Sore throat and runny nose",
+    "symptoms": [
+      "mild sore throat",
+      "runny nose"
+    ],
+    "duration": "3 days",
+    "medications": [
+      "paracetamol (as needed for pain)"
+    ],
+    "allergies": [
+      "None"
+    ],
+    "medical_history": [
+      "Otherwise healthy"
+    ],
+    "missing_information": [
+      "Severity of sore throat",
+      "Color or consistency of nasal discharge",
+      "Presence of cough",
+      "Presence of body aches",
+      "Exposure to sick contacts"
+    ],
+    "red_flags": [],
+    "suggested_questions": [
+      "Can you describe the sore throat further?",
+      "What color is the nasal discharge?",
+      "Are you experiencing any cough?",
+      "Do you have any body aches?",
+      "Have you been around anyone who is sick recently?"
+    ],
+    "clinician_summary": "Patient presents with a 3-day history of mild sore throat and runny nose. Denies fever. Reports occasional paracetamol use for pain. No known allergies. Generally healthy."
+  },
+  "red_flags": [],
+  "pii_findings": [],
+  "routing_decision": "NORMAL_INTAKE",
+  "safety_notes": "This output is an intake summary only. It is not medical advice, diagnosis, or treatment. A clinician must review the case before any clinical decision.",
+  "clinician_review": null
+}

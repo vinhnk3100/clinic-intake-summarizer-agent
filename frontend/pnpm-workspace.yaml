@@ -1,0 +1,8 @@
+# Native postinstall builds for this local demo:
+#   - sharp: only needed for production image optimization (not used here)
+#   - unrs-resolver: optional native ESLint import resolver
+# Decision recorded (false = do not build) to keep pnpm non-interactive and
+# avoid native compilation on Windows. Safe for dev/build.
+allowBuilds:
+  sharp: false
+  unrs-resolver: false

@@ -1,0 +1,37 @@
+{
+  "extraction": {
+    "chief_complaint": "Chest discomfort and shortness of breath",
+    "symptoms": [
+      "Chest discomfort",
+      "Shortness of breath"
+    ],
+    "duration": "Since this morning",
+    "medications": [],
+    "allergies": [],
+    "medical_history": [],
+    "missing_information": [],
+    "red_flags": [
+      "Chest discomfort",
+      "Shortness of breath"
+    ],
+    "suggested_questions": [
+      "Can you describe the chest discomfort?",
+      "When did the shortness of breath start?",
+      "Have you experienced these symptoms before?",
+      "Are you having any other symptoms, such as pain radiating to your arm or jaw, nausea, or sweating?"
+    ],
+    "clinician_summary": "Patient presents with chest discomfort and shortness of breath that began this morning."
+  },
+  "red_flags": [
+    "Chest discomfort",
+    "Shortness of breath",
+    "chest pain",
+    "severe shortness of breath"
+  ],
+  "pii_findings": [
+    "phone"
+  ],
+  "routing_decision": "HUMAN_REVIEW_REQUIRED",
+  "safety_notes": "Redacted PII before processing: phone. Prompt-injection attempt detected in the intake note; embedded instructions were ignored and the case was routed for human review. Deterministic red-flag screen matched: chest pain, severe shortness of breath. This output is an intake summary only. It is not medical advice, diagnosis, or treatment. A clinician must review the case before any clinical decision.",
+  "clinician_review": null
+}

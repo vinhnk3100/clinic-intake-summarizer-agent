@@ -1,0 +1,42 @@
+{
+  "extraction": {
+    "chief_complaint": "Chest discomfort and shortness of breath",
+    "symptoms": [
+      "Chest discomfort",
+      "Shortness of breath",
+      "Symptoms worsen with walking"
+    ],
+    "duration": "Since this morning",
+    "medications": [
+      "Blood pressure medication"
+    ],
+    "allergies": [],
+    "medical_history": [],
+    "missing_information": [],
+    "red_flags": [
+      "Chest discomfort",
+      "Shortness of breath"
+    ],
+    "suggested_questions": [
+      "Can you describe the chest discomfort?",
+      "How severe is the shortness of breath?",
+      "Are you experiencing any other symptoms?",
+      "What is the name of your blood pressure medication?"
+    ],
+    "clinician_summary": "Patient reports experiencing chest discomfort and shortness of breath since this morning, which worsens with walking. Patient is taking daily blood pressure medication."
+  },
+  "red_flags": [
+    "Chest discomfort",
+    "Shortness of breath",
+    "chest pain",
+    "severe shortness of breath"
+  ],
+  "pii_findings": [],
+  "routing_decision": "HUMAN_REVIEW_REQUIRED",
+  "safety_notes": "Deterministic red-flag screen matched: chest pain, severe shortness of breath. This output is an intake summary only. It is not medical advice, diagnosis, or treatment. A clinician must review the case before any clinical decision.",
+  "clinician_review": {
+    "reviewed": true,
+    "decision": "ESCALATE",
+    "note": "call cardiology now"
+  }
+}

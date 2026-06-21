@@ -1,0 +1,32 @@
+{
+  "extraction": {
+    "chief_complaint": "Headaches",
+    "symptoms": [
+      "Headaches in the afternoon"
+    ],
+    "duration": "Past week",
+    "medications": [
+      "Ibuprofen occasionally"
+    ],
+    "allergies": [],
+    "medical_history": [],
+    "missing_information": [],
+    "red_flags": [],
+    "suggested_questions": [
+      "Can you describe the headaches in more detail?",
+      "Have you noticed any triggers for the headaches?",
+      "Are there any other symptoms associated with the headaches?"
+    ],
+    "clinician_summary": "Patient reports experiencing headaches in the afternoon for the past week. They occasionally take ibuprofen. No known allergies or relevant medical history provided. Contact information and patient ID are redacted."
+  },
+  "red_flags": [],
+  "pii_findings": [
+    "address",
+    "email",
+    "patient_id",
+    "phone"
+  ],
+  "routing_decision": "NORMAL_INTAKE",
+  "safety_notes": "Redacted PII before processing: address, email, patient_id, phone. This output is an intake summary only. It is not medical advice, diagnosis, or treatment. A clinician must review the case before any clinical decision.",
+  "clinician_review": null
+}

@@ -1,0 +1,36 @@
+{
+  "extraction": {
+    "chief_complaint": "Not feeling well",
+    "symptoms": [
+      "Feeling generally unwell",
+      "Feeling 'off'"
+    ],
+    "duration": "Not provided",
+    "medications": [],
+    "allergies": [],
+    "medical_history": [],
+    "missing_information": [
+      "Specific symptoms",
+      "Onset and duration of symptoms",
+      "Any recent changes or events",
+      "Current medications",
+      "Allergies",
+      "Past medical history"
+    ],
+    "red_flags": [],
+    "suggested_questions": [
+      "Can you describe what you mean by 'not feeling well' or 'off'?",
+      "When did you start feeling this way?",
+      "Have you experienced any other symptoms?",
+      "Are you currently taking any medications?",
+      "Do you have any allergies?",
+      "Do you have any existing medical conditions?"
+    ],
+    "clinician_summary": "Patient reports feeling generally unwell and 'off' recently. Further details regarding specific symptoms, onset, duration, medications, allergies, and medical history are not provided."
+  },
+  "red_flags": [],
+  "pii_findings": [],
+  "routing_decision": "HUMAN_REVIEW_REQUIRED",
+  "safety_notes": "Intake appears unclear or insufficient (intake note too short/vague); routed for clinician review. This output is an intake summary only. It is not medical advice, diagnosis, or treatment. A clinician must review the case before any clinical decision.",
+  "clinician_review": null
+}
