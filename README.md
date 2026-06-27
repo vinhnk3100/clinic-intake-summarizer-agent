@@ -27,7 +27,7 @@ A healthcare-focused AI agent that helps clinic staff quickly understand a patie
 | **Demo model** | `gemini-2.5-flash-lite` (via `GEMINI_MODEL` in `.env`) |
 | **Framework** | Google ADK 2.0 graph **Workflow** API |
 | **Local mode** | Google AI Studio **API key** — no GCP credentials required |
-| **Fallback** | If `GEMINI_MODEL` is unset, `app/agent.py` falls back to `gemini-3.1-flash-lite` |
+| **Fallback** | If `GEMINI_MODEL` is unset, `app/agent.py` falls back to `gemini-2.5-flash-lite` |
 
 > The model is never changed automatically at runtime.
 

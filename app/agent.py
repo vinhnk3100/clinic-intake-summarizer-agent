@@ -61,7 +61,7 @@ except Exception:  # pragma: no cover - best effort
     pass
 
 # Model is configured via .env (GEMINI_MODEL), never hard-coded.
-MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite")
+MODEL = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite")
 
 DISCLAIMER = (
     "This output is an intake summary only. It is not medical advice, "

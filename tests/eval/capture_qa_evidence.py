@@ -170,7 +170,7 @@ async def main() -> int:
     generated_at = datetime.now(UTC).isoformat()
     summary_index = {
         "generated_at": generated_at,
-        "model": os.environ.get("GEMINI_MODEL", "gemini-3.1-flash-lite"),
+        "model": os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite"),
         "google_adk_version": getattr(google.adk, "__version__", "unknown"),
         "result": f"{len(CASE_FILES)}/{len(CASE_FILES)} scenarios PASSED",
         "cases": [

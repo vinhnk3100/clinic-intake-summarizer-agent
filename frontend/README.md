@@ -79,6 +79,25 @@ pnpm lint
 pnpm build
 ```
 
+## QA screenshots (manual)
+
+The data layer was verified end-to-end via the proxy (both routes return 200
+with the correct routing / `clinician_review`). To capture UI evidence for the
+capstone, take screenshots manually:
+
+1. Start both servers: `make ambient` (terminal 1) and `cd frontend && pnpm dev`
+   (terminal 2). Open http://localhost:3000.
+2. Capture: (a) the empty dashboard, (b) a **normal** case result
+   (`NORMAL_INTAKE`), (c) a **review** case showing the Clinician review panel +
+   `session_id`, and (d) the same case after **Submit review** (final JSON with
+   `clinician_review`). Use the OS screenshot tool (Win: `Win+Shift+S`).
+3. Save them under `qa-evidence/ui/` (e.g. `ui-01-dashboard.png`,
+   `ui-02-normal.png`, `ui-03-review-pending.png`, `ui-04-review-resolved.png`).
+
+> Automated browser capture (Chrome MCP) was used for the Playground screenshots
+> in `qa-evidence/`; it was unavailable when the UI was finished, so UI shots are
+> captured manually.
+
 ## Scripts
 
 | Command | Purpose |
