@@ -113,8 +113,8 @@ GEMINI_MODEL=gemini-2.5-flash-lite
 ### 🧪 Tests (deterministic, no model needed)
 
 ```bash
-make test        # or: uv run pytest tests/unit -q
-make lint        # or: uv run --extra lint ruff check app tests
+uv run pytest tests/unit -q                 # tests  (make test)
+uv run --extra lint ruff check app tests    # lint   (make lint)
 ```
 
 ### 📊 Local eval harness (uses the model via API key)
@@ -136,7 +136,7 @@ uv run python tests/eval/capture_qa_evidence.py
 ### 🎮 Playground (ADK developer UI)
 
 ```bash
-make playground      # or: uv run adk web . --host 127.0.0.1 --port 8081
+uv run adk web . --host 127.0.0.1 --port 8081      # (make playground)
 ```
 
 Open `http://127.0.0.1:8081/dev-ui/?app=app` — see `PLAYGROUND.md`.
@@ -146,7 +146,7 @@ Open `http://127.0.0.1:8081/dev-ui/?app=app` — see `PLAYGROUND.md`.
 ### ☁️ Ambient Pub/Sub-style service
 
 ```bash
-make ambient     # or: uv run uvicorn app.ambient_app:app --host 0.0.0.0 --port 8080
+uv run uvicorn app.ambient_app:app --host 0.0.0.0 --port 8080      # (make ambient)
 ```
 
 **Endpoints:** `POST /pubsub/push` · `POST /` (relaxed) · `POST /human-review/{session_id}` · `GET /health`
@@ -158,15 +158,18 @@ make ambient     # or: uv run uvicorn app.ambient_app:app --host 0.0.0.0 --port 
 The optional UI in `frontend/` calls the same ambient service through server-side proxy routes:
 
 ```bash
-# Terminal 1 — Backend
-make ambient
+# Terminal 1 — Backend (ambient service)
+uv run uvicorn app.ambient_app:app --host 0.0.0.0 --port 8080
 
-# Terminal 2 — ADK Playground
-make playground
+# Terminal 2 — ADK Playground (optional)
+uv run adk web . --host 127.0.0.1 --port 8081
 
 # Terminal 3 — Frontend
-make frontend
+cd frontend && pnpm dev --hostname 127.0.0.1 --port 3000
 ```
+
+> `make` shortcuts (`make ambient` / `make playground` / `make frontend`) are
+> available if you have GNU Make; the commands above work without it.
 
 Open `http://localhost:3000`.
 
@@ -264,7 +267,6 @@ clinic-intake-summarizer-agent/
 ├── README.md
 ├── AMBIENT.md
 ├── PLAYGROUND.md
-├── DEMO_SCRIPT.md
 ├── Makefile
 ├── pyproject.toml
 └── .env.example

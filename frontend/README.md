@@ -17,7 +17,7 @@ Browser (this UI)
                                           http://localhost:8080/human-review/{id}
                                                 │
                                                 ▼
-                                   Python ambient FastAPI service (make ambient)
+                                   Python ambient FastAPI service (uvicorn :8080)
                                    → ADK 2.0 graph Workflow (source of truth)
 ```
 
@@ -34,14 +34,14 @@ Browser (this UI)
 **Terminal 1 — backend (ambient service, port 8080):**
 
 ```bash
-make ambient
-# equivalently: uv run uvicorn app.ambient_app:app --host 0.0.0.0 --port 8080
+uv run uvicorn app.ambient_app:app --host 0.0.0.0 --port 8080
+# or, if you have GNU Make:  make ambient
 ```
 
 **Terminal 2 — ADK Playground (graph inspector, port 8081):**
 
 ```bash
-make playground
+uv run adk web . --host 127.0.0.1 --port 8081      # or: make playground
 ```
 
 Open http://localhost:8081/dev-ui/?app=app.
@@ -49,7 +49,7 @@ Open http://localhost:8081/dev-ui/?app=app.
 **Terminal 3 — frontend (Next.js, port 3000):**
 
 ```bash
-make frontend
+pnpm dev --hostname 127.0.0.1 --port 3000      # or: make frontend
 ```
 
 Open http://localhost:3000.
@@ -85,8 +85,8 @@ The data layer was verified end-to-end via the proxy (both routes return 200
 with the correct routing / `clinician_review`). To capture UI evidence for the
 capstone, take screenshots manually:
 
-1. Start both servers: `make ambient` (terminal 1) and `cd frontend && pnpm dev`
-   (terminal 2). Open http://localhost:3000.
+1. Start both servers: `uv run uvicorn app.ambient_app:app --host 0.0.0.0 --port 8080`
+   (terminal 1) and `cd frontend && pnpm dev` (terminal 2). Open http://localhost:3000.
 2. Capture: (a) the empty dashboard, (b) a **normal** case result
    (`NORMAL_INTAKE`), (c) a **review** case showing the Clinician review panel +
    `session_id`, and (d) the same case after **Submit review** (final JSON with
@@ -110,6 +110,6 @@ capstone, take screenshots manually:
 ## Notes
 
 - Configuration: `.env.local` (`NEXT_PUBLIC_APP_NAME`, `BACKEND_BASE_URL`).
-- If the UI shows a backend error, ensure `make ambient` is running and the
+- If the UI shows a backend error, ensure the ambient service (`uvicorn ... :8080`) is running and the
   AI Studio API key has quota (otherwise the model step returns 429 → 503).
 - shadcn/ui components live in `components/ui/`.

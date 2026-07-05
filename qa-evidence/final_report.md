@@ -1,15 +1,15 @@
 # Clinic Intake Summarizer Agent — QA Evidence Report
 
-**Evidence date:** June 20, 2026  
+**Evidence dates:** June 20, 2026 (behavioral scenarios + ADK Playground) · June 27, 2026 (full verification + Next.js demo UI)  
 **Model:** `gemini-2.5-flash-lite`  
 **Framework:** Google ADK `2.3.0` graph Workflow  
 **Dataset:** Synthetic data only  
-**Current result:** **6/6 evaluation scenarios passed**
+**Result:** **6/6 evaluation scenarios passed · 85 unit tests passed · lint, frontend build, and live end-to-end all verified**
 
-> This report consolidates the QA evidence available after Step 3. It covers
-> the six current behavioral scenarios and their visual evidence. It is not yet
-> the full Step 4 verification report, which will additionally include the
-> complete integration-test and frontend production-build results.
+> This is the complete QA verification report. It covers the six behavioral
+> scenarios (JSON + ADK Playground evidence), the deterministic
+> test/lint/build/eval results, and the Next.js demo UI (with screenshots). All
+> data is synthetic.
 
 ## 1. Project purpose
 
@@ -107,6 +107,23 @@ Each scenario is supported by:
 | 6 | Out of scope | Coding request mixed with a symptom | `HUMAN_REVIEW_REQUIRED` | `HUMAN_REVIEW_REQUIRED` | PASS |
 
 Machine-readable run metadata: [`SUMMARY.json`](./SUMMARY.json)
+
+### Verification & quality summary
+
+Beyond the six behavioral scenarios, the full stack was verified:
+
+| Check | Command | Result |
+|-------|---------|--------|
+| Deterministic unit tests | `uv run pytest tests/unit -q` | **85 passed** |
+| Lint | `uv run --extra lint ruff check app tests` | **All checks passed** |
+| Local eval (6 scenarios) | `uv run python tests/eval/run_local_eval.py` | **6/6 PASSED** |
+| Frontend lint | `pnpm lint` | clean |
+| Frontend production build | `pnpm build` | **build OK** |
+| Ambient flows (live) | curl `/pubsub/push`, `/human-review/{id}` | normal / pending / resume verified |
+| Demo UI (live) | Next.js → proxy → ambient | verified (see §11) |
+
+No secrets are committed: `.env` is gitignored, and neither the Google API key
+nor any token appears in tracked files.
 
 ---
 
@@ -384,7 +401,45 @@ coding task prevents the case from being classified as a normal intake.
 
 ---
 
-## 11. Traceability to project requirements
+## 11. Evidence 7 — Demo UI (Next.js)
+
+### Context
+
+The same workflow is exposed through a Next.js (App Router, TypeScript, Tailwind,
+shadcn/ui) demo UI. The UI implements **no agent logic** — it calls the Python
+ambient service via server-side proxy routes (`/api/intake` wraps the note into a
+Pub/Sub base64 envelope; `/api/human-review/[sessionId]` resumes a review). These
+screenshots were captured live (Next.js → proxy → ambient → graph workflow).
+
+### Visual evidence
+
+**Empty dashboard — sample selector, intake textarea, submit.**
+
+![UI 1 — dashboard](./ui/ui-01-dashboard.png)
+
+**Review pending (chest pain) — `HUMAN_REVIEW_REQUIRED` badge, session id, red-flag
+alert, clinical cards, PII findings / safety notes, and the clinician-review panel.**
+
+![UI 2 — review pending](./ui/ui-02-review-pending.png)
+
+**Review resolved — after submitting `ESCALATE` + "call cardiology now", the
+clinician review is recorded.**
+
+![UI 3 — review resolved](./ui/ui-03-review-resolved.png)
+
+**Final structured JSON — the collapsible panel shows the full `IntakeSummary`
+(routing, `pending_human_review: false`, session id, extraction, clinician review).**
+
+![UI 4 — final JSON](./ui/ui-04-final-json.png)
+
+**Evidence interpretation:** the UI surfaces the exact same deterministic outcomes
+as the backend — routing badge, merged red flags, redacted PII findings, safety
+notes, and the human-in-the-loop pause/resume — confirming the UI is a faithful
+read-only view of the Python source of truth.
+
+---
+
+## 12. Traceability to project requirements
 
 | Requirement concept | Evidence |
 |---------------------|----------|
@@ -397,8 +452,9 @@ coding task prevents the case from being classified as a normal intake.
 | Review for unclear information | Evidence 5 |
 | Review for out-of-scope requests | Evidence 6 |
 | No diagnosis or prescription | Safety notes and extraction boundaries in Evidence 1–6 |
+| Demo UI is a faithful read-only view (no agent logic) | Evidence 7 |
 
-## 12. Current limitations
+## 13. Current limitations
 
 This is a homework-scale implementation. The current evidence should be
 interpreted with the following limitations:
@@ -411,10 +467,8 @@ interpreted with the following limitations:
 - Sessions are in memory and intended for local demonstration.
 - The Next.js UI and ADK Playground run separate ADK sessions; the same prompt
   is submitted to both when demonstrating the product view and graph view.
-- Full Step 4 integration and frontend production-build verification has not
-  yet been appended to this report.
 
-## 13. Reproduction commands
+## 14. Reproduction commands
 
 ```bash
 # Deterministic unit tests
@@ -430,17 +484,23 @@ uv run python tests/eval/capture_qa_evidence.py
 Local demonstration:
 
 ```bash
-make ambient      # http://localhost:8080
-make playground   # http://localhost:8081/dev-ui/?app=app
-make frontend     # http://localhost:3000
+uv run uvicorn app.ambient_app:app --host 0.0.0.0 --port 8080   # http://localhost:8080
+uv run adk web . --host 127.0.0.1 --port 8081                   # http://localhost:8081/dev-ui/?app=app
+cd frontend && pnpm dev --hostname 127.0.0.1 --port 3000        # http://localhost:3000
 ```
 
-## 14. Conclusion
+To regenerate the UI screenshots, run the ambient service + `pnpm dev`, then drive
+the UI (see `frontend/README.md` → "QA screenshots").
 
-The current evidence confirms that all six intended behavioral scenarios route
-as expected. The agent demonstrates structured extraction, privacy filtering,
-prompt-injection resistance, red-flag escalation, insufficient-information
-handling, out-of-scope detection, and a real human-in-the-loop pause/resume
-workflow.
+## 15. Conclusion
 
-**Baseline QA result: 6/6 scenarios passed.**
+The evidence confirms that all six intended behavioral scenarios route as
+expected, and that the full stack is green: 85 unit tests, clean lint, a passing
+frontend production build, a 6/6 deterministic eval, and live end-to-end runs
+through both the ambient service and the Next.js UI. The agent demonstrates
+structured extraction, privacy filtering, prompt-injection resistance, red-flag
+escalation, insufficient-information handling, out-of-scope detection, and a real
+human-in-the-loop pause/resume workflow — with every safety-critical decision made
+in deterministic code rather than by the model.
+
+**Final QA result: 6/6 scenarios passed · 85 unit tests passed · lint / build / live end-to-end verified.**

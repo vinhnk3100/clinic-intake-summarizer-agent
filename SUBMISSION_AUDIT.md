@@ -48,7 +48,7 @@ Studio API-key mode (no GCP). Synthetic data only.
   all three to `gemini-2.5-flash-lite` to match the configured demo model. No
   `gemini-3.1` references remain.
 - Playground port `8081` consistent across Makefile, README, PLAYGROUND.md,
-  DEMO_SCRIPT.md, frontend/README.md.
+  frontend/README.md.
 - 6 eval scenarios consistent across dataset, `eval_config.yaml`, harness, and
   `qa-evidence/SCREENSHOTS.md`.
 

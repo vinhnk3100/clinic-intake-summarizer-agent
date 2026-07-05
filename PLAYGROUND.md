@@ -18,8 +18,8 @@ the ambient service rather than replacing the ADK Playground.
 
 ```bash
 agents-cli install      # once, if dependencies are not installed yet
-make playground
-# equivalent: uv run adk web . --host 127.0.0.1 --port 8081
+uv run adk web . --host 127.0.0.1 --port 8081
+# or, if you have GNU Make:  make playground
 ```
 
 This starts the ADK web dev UI on port `8081` in the foreground. Port `8080` is
@@ -48,13 +48,13 @@ Use three terminals:
 
 ```bash
 # Terminal 1 — event-driven API
-make ambient
+uv run uvicorn app.ambient_app:app --host 0.0.0.0 --port 8080
 
 # Terminal 2 — graph inspector
-make playground
+uv run adk web . --host 127.0.0.1 --port 8081
 
 # Terminal 3 — product-facing demo UI
-make frontend
+cd frontend && pnpm dev --hostname 127.0.0.1 --port 3000
 ```
 
 - Next.js: `http://localhost:3000`

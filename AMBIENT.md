@@ -13,9 +13,8 @@ dev server (`app/fast_api_app.py`, unchanged). Synthetic data only.
 ## 1. How to run the service (port 8080)
 
 ```bash
-make ambient
-# or directly (e.g. on Windows without `make`):
 uv run uvicorn app.ambient_app:app --host 0.0.0.0 --port 8080
+# or, if you have GNU Make:  make ambient
 ```
 
 - Uses Google AI Studio **API key mode** from `.env` (`GOOGLE_GENAI_USE_VERTEXAI=FALSE`,
@@ -124,7 +123,7 @@ curl -s -X POST http://127.0.0.1:8080/human-review/clinic-intake-sub-2002 \
   The model is **not** called again (v1 option A).
 
 Alternatively, the same paused review can be resumed interactively from the
-**Playground** (`make playground`) by entering, for example,
+**Playground** (`uv run adk web . --host 127.0.0.1 --port 8081`) by entering, for example,
 `ESCALATE call cardiology now` in the `adk_request_input` card's
 **`Enter your response...`** field. Using the main chat box starts a new
 invocation instead of resuming the paused workflow. See `PLAYGROUND.md`.
@@ -148,7 +147,7 @@ end-to-end successfully:
    "note": "call cardiology now"}`. The model was **not** called again.
 
 The normal, sparse, and prompt-injection ambient flows were verified live the
-same way. Re-run them with the curl commands above (or via `DEMO_SCRIPT.md`).
+same way. Re-run them with the curl commands above.
 
 ## 8. About the 429 quota error (live testing)
 
